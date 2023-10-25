@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .table-with-border {
+                border-collapse: collapse;
+                }
+        .table-with-border th, .table-with-border td{
+                padding: 8px;
+                border: 2px solid;
+        }
+        .header-with{
+              font-family: fantasy;
+        }
+        body{
+        background-image: url('{% static 'mt15.jpg' %}');
+        overflow-y: auto;
+        }
+        a{
+        text-decoration: none;
+        }
+        .rounded-button {
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>List of data from DB</h1>
+</div>
+<table class="table-with-border">
+    <thead class="header-with">
+    <th>Name</th>
+    <th>Address</th>
+    <th>MobileNumber</th>
+    </thead>
+    <tr>
+    {%  for st in dataFromDB %}
+    <td>{{st.Name}}</td>
+    <td>{{st.Address}}</td>
+    <td>{{st.MobileNumber}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<button class="rounded-button" ><a href="{% url 'register_url' %}">Register</a></button>
+<br>
+<form action="{% url 'correction_url' %}">
+    {% csrf_token %}
+    <!-- Add any form fields or content you need here -->
+    <button type="submit">Name Correction</button>
+</form>
+
+<!--Help pd javaScript-->
+<button id="nextPageButton">Register</button>
+
+    <script>
+        const nextPageButton = document.getElementById("nextPageButton");
+        nextPageButton.addEventListener("click", () => {
+            window.location.href = "{% url 'register_url' %}";
+        });
+    </script>
+</body>
+</html>

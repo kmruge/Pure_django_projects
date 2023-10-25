@@ -1,0 +1,16 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<div>
+    <form method="post" >
+          {{formDel.as_p}}
+          {% csrf_token %}  <!--This line is to encrypt the data-->
+    <input type="submit" value="accept/submit">
+    </form>
+</div>
+</body>
+</html>

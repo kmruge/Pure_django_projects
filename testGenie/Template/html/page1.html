@@ -1,0 +1,768 @@
+<html>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'CSS1/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <head>
+      <title> Test Genie! </title>
+      <link rel="icon" type="image/x-icon" href="https://freepngimg.com/save/128008-genie-download-free-image/1127x604">
+    </head>
+    <header class="bg-img">
+  <div class="site-logo">
+    <img id="logo" src="{% static 'img/test_genie_logo.png' %}" alt="logo" width="200" height="150">
+  </div>
+        
+      
+      <div id="headingstyle" style="color: #ffffff;"><center><h2 style="font-size: 40px;"> Test Genie<sup style="color:#ffffff">  2.0</sup></h2></center>
+      </div>
+      
+      <p style="opacity:0.8; background-color: white; color: #02100b;" class="topright">
+        <b>Logged in to Acccount:</b> <label id="accountlogged"></label><br/><b>Token Used:</b> <label id="authtoken"></label>
+        <br/><b>Logged in User: </b><label id="usrname"></label>
+        <br/><b>Now: </b><label style="color:#02388e" id="dateandtime"></label>
+
+        <br/> <span style = "display:none" id = "v1section"> <b>V1 APIs: <label style="color:#02388e" for="apiKey"></label>
+            <span id="apiKey" style=color:#DF6233></span>
+            <button id="showAuthCodeButton">Show Auth Code</button> 
+            <span id="copyButton" class="copy-button" aria-label="Copy to clipboard"><i class="fa fa-files-o" aria-hidden="true"></i></span>
+        </span>
+
+          
+       
+          
+  
+        
+
+      </p><br/>
+      <p style="font-size: 20px; opacity: 0.8; background-color: #6c5da3; color: #ffffff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px; display: inline-block;" class="topmiddle">
+        <b style="color: #ffffff;">🎟️ Tickets: </b>
+        <strong><label style="color: #ffffff; font-size: 30px;" id="tickets_count">0</label></strong>
+        <b style="color: #ffffff;">👤 Contacts: </b>
+        <strong><label style="color: #ffffff; font-size: 30px;" id="contacts_count">0</label></strong>
+        <b style="color: #ffffff;">🇨 Categories: </b>
+        <strong><label style="color: #ffffff; font-size: 30px;" id="categories_count">0</label></strong>
+      </p>
+      
+      
+      
+      
+      
+      
+      
+      
+
+
+    <p style="opacity:0.8; background-color: rgb(0, 0, 0); color: #02100b;" class="topquote">
+      <label style="font-family:'Bradley Hand'; color:white" id="quote">Quotes Loading...</label>
+      </p>
+    
+    <p class="topleft" >
+    <a href="https://happyfox.keka.com" target="_blank">
+      <img id="linked_icon" src="https://play-lh.googleusercontent.com/OiG-QsKPm--v-16z225UtUND2IIbinlLrnBhSRch9kL_ruBCIh4GDA0sD_BnUPF93Ew" alt="Keka">
+    </a>
+    <a href="https://happyfox.testrail.com/index.php?/auth/login/" target="_blank">
+      <img id="linked_icon" src="https://www.ideracorp.com/~/media/IderaInc/Images/Brand/TestRail" alt="Test Rail" >
+    </a>
+    <a href="https://support.happyfox.com/staff/tickets/?status=_pending" target="_blank">
+      <img id="linked_icon" src="https://hfweb-assets.s3.amazonaws.com/brand/happyfox-logo.png" alt="Test Rail" >
+    </a>
+    <a href="https://dev.happyfox.co/staff/tickets/?status=_pending" target="_blank">
+      <img id="linked_icon" src="https://hf-staging-attachments.s3.amazonaws.com/hdpdev_user_customized/favicon.png?1674130782257" alt="Dev HF" >
+    </a>
+    <a href="https://trello.com/login" target="_blank">
+      <img id="linked_icon" src="https://play-lh.googleusercontent.com/CiGs15N1e1tXrSnVLEY9jOnKi1oNzPQNRjqhR8fXE0pnu_bRyNmfc8xXr2VQUJTfJ9A" alt="Trello" >
+    </a>
+    <a href="https://us-east-2.console.aws.amazon.com/cloudwatch/home?region=us-east-2" target="_blank">
+      <img id="linked_icon" src="https://www.dreamsplus.in/wp-content/uploads/2020/05/AWS-Cloud-logo-png.jpg" alt="AWS" >
+    </a>
+    <a href="https://happyfox.okta.com/" target="_blank">
+      <img id="linked_icon" src="https://play-lh.googleusercontent.com/IOMxgXpJHi-Yk3ukLH0HFKPqoP7rJWeQusgGJ4ZnijcYffbvIzw8ldWUla0frMV_g1Q" alt="OKTA" >
+    </a>
+    <a href="https://github.com/happyfoxinc/helpdesk/actions/workflows/deploy.yml" target="_blank">
+      <img id="linked_icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GITHUB BE" >
+    </a>
+    <a href="https://github.com/happyfoxinc/happyfox-web/actions" target="_blank">
+      <img id="linked_icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png" alt="GITHUB FE" >
+    </a>
+  </p>
+  <p class="topbuttons">
+    <button type="button" style="float:left; font-weight: bold;" onClick="javascript:getAuditLog('1').then(renderauditdata);">VIEW AUDIT LOG </button>
+    <button type="button" style="float:left; font-weight: bold;" onClick="javascript:getTicketData('1').then(renderticketdata);">VIEW TICKETS</button>
+    <button type="button" style="float:left; font-weight: bold;" onClick="javascript:getSentEmailLogsData('1').then(renderemaillog);">VIEW EMAIL LOG </button>
+    <button type="button" style="float:left; font-weight: bold;" onClick="javascript:getPendingTasks('1').then(renderPendingTasksdata);">EXECUTE PENDING TASKS </button>
+    <button type="button" id="random_ticket_create" style="display:none; background-color: rgb(59, 123, 31); color:#fff; float:left; font-weight: bold;" onClick="javascript:ticketRandomizer('create');">RANDOM TICKET</button>
+  </p>
+    </header>
+    <CENTER><span style="align-items: center; font-weight: bold; font-size:large; color:rgb(255, 0, 0);" id="error-message"></span></CENTER>
+    <div class="topnav">
+      <div class="login-container">
+        
+        <form name="myForm">
+          
+          <span style="font-family:'Comic Sans MS'; font-size:large; color: #ffffff;"> Enter Account Details: </span>
+          <span style="font-size:smaller; color:rgb(255, 0, 0);" id="error-message"></span>
+          <input name="sub-domainer" type="text" id="lsub-domain" placeholder="Enter Sub Domain" onchange="setSubDomain(document.getElementById('lsub-domain').value);" required/>
+      <select class="loginselect" id="ldomain" onchange="setDomain(document.getElementById('ldomain').value);">
+        
+        <option value="Select a Domain..">Select a Domain.. </option>
+        <option selected value="supporthive.com">supporthive.com</option>
+        <option value="happyfox.co">happyfox.co</option>
+        <option value="happyfox.com">happyfox.com</option>
+        </select>
+      <input name="username" type="text" id="aemail" placeholder="Enter Username / Email" required>
+      <input name="lpass" type="password" id="apsw" placeholder="Enter Password" name="psw" required>
+        
+        <button class="buttonsmall" type="button" id="login"  onClick="javascript:required();">Login</button>
+        </form>
+      </div>
+    </div>
+<div id="notificationStrip"></div>
+    </head>
+  
+<!-- Add icon library --> 
+<body>
+
+<!--Time-->
+<script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script src="{% static 'JS1/kb.js' %}"></script>
+<script src="{% static 'JS1/v1_api.js' %}"></script>
+<script src="{% static 'JS1/app.js' %}"></script>
+
+  <!-- Menu bar -->
+
+  <!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!--Generic Creation-->
+
+    <div id="lineRight">
+
+      <b><p id="header"><img id="heading_icon" src="https://cdn-icons-png.flaticon.com/512/9653/9653916.png"/> Account Creation</p></b>
+  <!-- Account Creation -->
+  <form  action="#" method="POST">
+    <table border=0>
+    <tr><td>
+      <b>Sub Domain:</b></td>
+      <td><input id="acsubdomain" type="text" class="d"></td></tr>    
+    <tr><td><b>Admin Email </td><td><input type=text id="adminemail"></td></tr> 
+    <tr>
+      <td></td>
+      <td> 
+        <button id="acreatetype" type=button class="button button1" onClick="javascript:genericCreation('Account',document.getElementById('acsubdomain').value);"> Create </button>
+    </td>
+  </tr>
+    </table>
+</form>
+
+<!--Agent Creation -->
+
+<b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/2706/2706950.png"/> Agent Creation</p></b>
+
+  
+  <form  action="#" method="POST">
+    <table border=0>
+      <tr><td><span style="font-size:smaller; color:red;" id="agent_create-error-message"></span></td></tr>
+
+    <tr>
+      <tr>
+        <td><b>Username:</td>
+        <td>
+          <input id="agentusername" type="text" />
+        </td></tr>
+      <tr><td><b>Password: </td><td><input type=text id="agentpassword"></td></tr> 
+      <tr><td><b>Email: </td><td><input type=text id="agentemail"></td></tr>
+        <tr><td><b>Agent Name: </td><td><input type=text id="agentname"></td></tr>  
+      <tr>
+      <td><b>Assign Role:</td>
+      <td>
+        <select class="option" id="agentroles">
+        <option value="Select..">Select..</option>
+      </select>
+      </td></tr>
+    <tr><td></td>
+      <td> <button id="agent_create" type=button class="button button1" onClick="javascript:createAgent(document.getElementById('agentname').value)"> Create </button>
+    </td>
+  </tr>
+    </table>
+</form>
+
+<!-- Asset Type Creation End-->
+
+      <b><p id="header"><img id="heading_icon" src="https://cdn-icons-png.flaticon.com/512/9483/9483124.png"/>  Manage Creation
+      </p></b>
+    <form  action="#" method="POST">
+      <table border=0>
+        <tr><td><span style="font-size:smaller; color:red;" id="create-error-message"></span></td></tr>
+      <tr>
+      <td><b>Type to Create:</td>
+      <td>
+        <select class="option" id="otype">
+        <option value="Select..">Select..</option>
+        <option value="categories">Category</option>
+        <option value="statuses">Status</option>
+        <option value="priorities">Priority</option>
+        <option value="contacts">Contacts</option>
+        <option value="contact-groups">Contact Group</option>
+      </select>
+      </td></tr>
+      <tr><td>
+        <b>Name [Optional]:</b></td>
+        <td><input id="typename" type="text" class="d"></td></tr>    
+      <tr id="custom_field_type" style="display: none;">
+        <td><b>Custom Field:</b></td>
+          <td>
+            <select id="custom_field_type_sel" class="option">
+            <option value="Select..">Select..</option>
+            <option value="text">Text</option>
+            <option value="dropdown">Dropdown</option>
+            <option value="multiple_option">Multi Choice</option>
+            <option value="number">Number</option>
+            <option value="date">Date</option>
+            </select>
+          </td>
+        </tr>    
+        <tr><td><b>No of Items: </td><td><input class="noofitems" type=text value="1" id="nitems"></td></tr> 
+      <tr><td></td>
+        <td> <button id="createtype" type=button class="button button1" onClick="javascript:genericCreation(document.getElementById('otype').value, document.getElementById('typename').value);"> Create </button>
+      </td>
+    </tr>
+     
+      </table>
+  </form>
+
+  <b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/2128/2128659.png"/> Custom Field Creation</p></b>
+
+  
+  <form  action="#" method="POST">
+    <table border=0>
+      <tr><td><span style="font-size:smaller; color:red;" id="custom_create-error-message"></span></td></tr>
+      <tr>
+        <td><b>Type of Field:</td>
+        <td>
+          <select class="option" id="cqueue">
+            <option value="Select..">Select..</option>
+            <option selected value="ticket">Ticket</option>
+            <option value="contact">Contact</option>
+            <option value="contact-group">Contact Group</option>
+        </select>
+        </td></tr>
+    <tr>
+    <td><b>Type of Custom Field:</td>
+    <td>
+      <select class="option" id="ctype">
+        <option value="Select..">Select..</option>
+        <option value="text">Text</option>
+        <option value="dropdown">Dropdown</option>
+        <option value="multiple_option">Multi Choice</option>
+        <option value="number">Number</option>
+        <option value="date">Date</option>
+    </select>
+    </td></tr>
+    <tr>
+      <td></td>
+      <td> <div class="tooltip"><input type="checkbox" id="custom_internal" title="Interal or External">I/E
+        <span class="tooltiptext">Internal or External</span></div>
+        <div class="tooltip">
+        <input type="checkbox" id="custom_mandate" checked value=""><b style=color:red;>*</b>
+        <span class="tooltiptext">Mandatory or Optional</span></div>
+        <div class="tooltip">
+      <input type="checkbox" id="custom_closure" value="">TC
+      <span class="tooltiptext">Mandate on Ticket closure?</span></div>
+      <div class="tooltip">
+      <input type="checkbox" id="custom_move" value="">CM
+      <span class="tooltiptext">Mandate on Category closure?</span></div>
+          </td></tr>
+    <tr><td>
+      <b>Name [Optional]:</b></td>
+      <td><input id="cfname" type="text" class="d"></td></tr>    
+      <tr><td><b>No of Items: </td><td><input class="noofitems" type=text value="1" id="citems"></td></tr> 
+    <tr><td></td>
+      <td> <button id="custom_create" type=button class="button button1" onClick="javascript:createCustomField(document.getElementById('ctype').value, document.getElementById('cqueue').value,document.getElementById('cfname').value);"> Create </button>
+    </td>
+  </tr>
+    
+    </table>
+</form>
+
+
+  <br/>
+  <br/>
+    </div>
+
+<div id="lineLeft">
+<b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/7505/7505544.png"/> Ticket Creation</p></b>
+         <form  action="#" method="POST">
+          <table border=0>
+            <tr>
+              <td><button class="randomize-button" id="random_ticket" type=button onClick="javascript:ticketRandomizer('random');">Randomizer <i class="fa fa-random"></i></button></td>
+
+            </tr>
+            <tr><td><span style="font-size:smaller; color:red;" id="ticket-create-error-message"></span></td></tr>
+      <tr>
+          <tr>
+              <td><b>Category:</td>
+          <td><select class="option" id="category" onchange="setcategoryid(document.getElementById('category').value);">
+            <option value="">Select a Category.. </option>
+          </select></td>
+          <td><button style="color:red;"id="delcategories" type=button onClick="javascript:genericDelete('categories');"><i class="fa fa-trash"></i></button></td>
+        </tr>
+            
+          <tr>
+              <td><b>Private Ticket?<td> <input type="checkbox" id="tickettype" value=""></td>
+                  </td></tr>
+              
+              <td><b>Statuses:</td><td>
+          <select class="option" id="status" onchange="setstatusid(document.getElementById('status').value);">
+            <option value="">Select a Status.. </option>
+          </select>
+                  </td>
+                  <td><button style="color:red;" type=button id="delstatuses" value="statuses" onClick="javascript:genericDelete(`statuses`);"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                
+                </tr>
+              
+          <tr>
+              <td><b>Priority:</td><td>
+          <select class="option" id="priority" onchange="setPriorityId(document.getElementById('priority').value);">
+            <option value="">Select a Priority.. </option>
+          </select>
+                  </td>
+                
+                  <td><button style="color:red;"id="delpriorities" type=button onClick="javascript:genericDelete('priorities');"><i class="fa fa-trash"></i></button></td>
+                </tr>   
+          
+          <tr>
+              <td><b>Contact:</td><td>
+          <select class="option" id="contacts" onchange="setContactId(document.getElementById('contacts').value);">
+            <option value="">Select a Contact.. </option>
+          </select>
+                  </td>
+                  <td><button style="color:red;" type=button id="delcontacts" value="contacts" onClick="javascript:genericDelete(`contacts`);"><i class="fa fa-trash"></i></button></td>      
+                
+                </tr> 
+         
+          <tr><td><b>No of Tickets: </td><td><input class="noofitems" value="1" type=text id="ntickets"></td></tr>    
+              
+          <tr></tr>
+          
+                
+          <tr><td></td><td> <button id="submitter" type=button class="button button1" onClick="javascript:ticketCreation();"> Submit </button>
+          </td>
+        </tr>
+          </table>
+      </form>
+
+      
+<!--Asset Type Creation -->
+
+<b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/8143/8143452.png"/> Asset Type Creation</p></b>
+
+  
+  <form  action="#" method="POST">
+    <table border=0>
+      <tr><td><span style="font-size:smaller; color:red;" id="asset_type_create-error-message"></span></td></tr>
+
+    <tr>
+      <tr>
+        <td><b>Name [Optional]:</td>
+        <td>
+          <input id="assettype" type="text" />
+        </td></tr>
+    <tr>
+      <td></td>
+      <td> <div class="tooltip"><input type="checkbox" id="enable_contact_association">CA
+        <span class="tooltiptext">While viewing an asset, link one or more contacts related to the asset.</span></div>
+        <div class="tooltip">
+        <input type="checkbox" id="enable_ticket_association" checked value="">TA
+        <span class="tooltiptext">While working on a ticket, link one or more assets related to the ticket.</span></div>
+        <div class="tooltip">
+      <input type="checkbox" id="enable_asset_quantity_for_ticket" value="">TC
+      <span class="tooltiptext">When linking assets to a ticket, optionally specify the quantity of assets related to the ticket.</span></div>
+        </td></tr> 
+      <tr><td><b>No of Items: </td><td><input class="noofitems" type=text value="1" id="atitems"></td></tr> 
+    <tr><td></td>
+      <td> <button id="asset_type_create" type=button class="button button1" onClick="javascript:createAssetType(document.getElementById('assettype').value)"> Create </button>
+    </td>
+  </tr>
+    </table>
+</form>
+
+<!-- Asset Type Creation End-->
+
+<!--Asset Creation -->
+
+<b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/8143/8143452.png"/> Asset Creation</p></b>
+
+  
+  <form  action="#" method="POST">
+    <table border=0>
+      <tr><td><span style="font-size:smaller; color:red;" id="asset_create-error-message"></span></td></tr>
+<td><b>Asset type:</td>
+    <td>
+      <select class="option" id="assettypes">
+        <option value="Select..">Select..</option>
+    </select>
+    </td></tr>
+    <tr>
+      <tr>
+        <td><b>Name [Optional]:</td>
+        <td>
+          <input id="assetname" type="text" />
+        </td></tr>
+        <tr>
+        <td><b>Display ID [Optional]:</td>
+        <td>
+          <input id="assetdisp" type="text" />
+        </td></tr>
+      <tr><td><b>No of Items: </td><td><input class="noofitems" type=text value="1" id="aitems"></td></tr> 
+    <tr><td></td>
+      <td> <button id="asset_create" type=button class="button button1" onClick="javascript:genericCreation('assets',document.getElementById('assetname').value)"> Create </button>
+    </td>
+  </tr>
+    
+    </table>
+</form>
+
+<!-- Asset Creation End-->
+
+      </div>
+
+      <div id="lineRight">
+
+        <b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/2776/2776065.png"/> Set Feature Flag</p></b>
+      <form autocomplete="off" action="#" method="POST">
+        <table border=0>
+        <tr><td>
+          <b>Feature Flag: </b></td>
+          
+          <td><div class="autocomplete" style="width:200px;"><input style="width:200px;" class="borderbox" id="plan-features" type="text" class="d"></div></td>
+        </tr>    
+        <tr><td><b>True / False </td><td><input type=checkbox id="flagstatus" checked></td></tr> 
+        <tr><td></td>
+          <td> 
+            <button id="updateflag" type=button class="button button1" onClick="javascript:featureFlagUpdate('generic');"> Update </button>
+        </td></tr>
+        </table>
+    </form>
+
+    <!--Multibrand Creation-->
+
+    <b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/5486/5486254.png"/> Create Multibrand</p></b>
+      <form autocomplete="off" action="#" method="POST">
+        <table border=0>
+        <tr><td>
+          <b>Name: </b></td>
+          
+          <td><input style="width:200px;" class="borderbox" id="brand-name" type="text" class="d"></td>
+        </tr>
+        <tr><td>
+          <b>Domain Name: </b></td>
+          
+          <td><input style="width:200px;" class="borderbox" id="brand-domain" type="text" class="d"></td>
+        </tr>     
+        <tr>
+          <td><b>Brand Category:</td>
+      <td><select class="option" id="brand_category" onchange="setbrandcategoryid(document.getElementById('brand_category').value);">
+        <option value="">Select a Brand Category.. </option>
+      </select></td>
+      </tr>
+        <tr><td></td>
+          <td> 
+            <button id="createbrand" type=button class="button button1" onClick="javascript:genericCreation('brands',document.getElementById('brand-name').value);"> Create </button>
+        </td></tr>
+</table>
+
+
+        <!--KB Creation-->
+
+    <b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/2680/2680919.png"/> Create Article</p></b>
+    <form autocomplete="off" action="#" method="POST">
+      <table border=0>
+      <tr><td>
+        <b>Title: [Optional] </b></td>
+        
+        <td><input style="width:250px;" class="borderbox" id="kb_title" type="text" class="d"></td>
+      </tr>
+      <tr><td>
+        <b>Description: [Optional] </b></td>
+        
+        <td><textarea rows="8" cols="50" style="width:250px;" class="borderbox" id="kb_desc" type="text" class="d"></textarea><div>
+          <button type="button" onclick="applyStyle('bold')"><i class="fa fa-bold" aria-hidden="true"></i></button>
+          <button type="button" onclick="applyStyle('italic')"><i class="fa fa-italic" aria-hidden="true"></i></button>
+          <button type="button" onclick="applyStyle('underline')"><i class="fa fa-underline" aria-hidden="true"></i></button>
+          <input type="color" id="colorPicker" onchange="applyColor()"></input>
+        </div></td>
+      </tr>     
+      <tr>
+        <td><b>KB Section:<i style="color: red;">*</i></td>
+    <td><select class="option" id="kb_sections" onchange="setKbSectionId(document.getElementById('kb_sections').value);">
+      <option value="">Select a Section.. </option>
+    </select></td>
+    </tr>
+    <tr>
+              <td><b>Is External?<td> <input type="checkbox" id="kb_is_external" value=""></td>
+                  </td></tr>
+                  <tr><td><b>No of Articles: </td><td><input class="noofitems" type=text value="1" id="kitems"></td></tr>              
+      <tr><td></td>
+        <td> 
+          <button id="createarticle" type=button class="button button1" onClick="javascript:genericCreation('articles',document.getElementById('kb_title').value);"> Create </button>
+      </td></tr>
+        
+        </table>
+    </form>
+
+    <b><p id="header"><img style="width:30px; height:30px;" src="https://cdn-icons-png.flaticon.com/512/3128/3128287.png"/> Search Ticket</p></b>
+        <table border=0>
+          
+        <tr><td>
+          <b>Term: </b></td>
+          
+          <td><input style="width:200px;" class="borderbox" id="ticket_id" type="text" class="d">
+          </td>
+          <td> 
+            <button id="searchticket" type=button onClick="javascript:searchTicket(document.getElementById('ticket_id').value);"> Search </button>
+        </td>
+        </tr>
+        <tr><td><span style="font-size:smaller; color:red;" id="ticket-search-error-message"></span></td></tr>
+      </table>
+
+     
+    
+
+        <table id="searchtable" style="display:none; opacity:0.8; background-color: white;" border=0>
+          <tr>
+            <td colspan="2" align="right"><a style="float:right; color:red" href="#" onClick="javascript:toggleSearchResults();">X</a></td>
+            <td>&nbsp;</td>
+          </tr>
+         
+            <tr>
+            
+<td>Ticket Id : </td><td> <label id="ticketid"></td></tr>
+<tr><td>Status : </td><td><label id="ticket_status"></td></tr>
+  <tr><td>Priority : </td><td><label id="ticket_priority"></td></tr>
+    <tr><td>Subject : </td><td><label id="ticket_subject"></td></tr>
+     <tr><tr> <td>Category : </td><td><label id="ticket_category"></td></tr>
+       <tr> <td>Contact : </td><td><label id="ticket_contact"></label></td>
+
+        </tr>
+        
+       </td>
+        </tr>  
+        </table>
+        <label style="display:none; color:red" id="noticketsfound"></label>
+
+
+<!-- The Audit log overlay -->
+<div id="myAuditNav" class="overlay">
+  
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeAuditNav()">&times;</a>
+  <center><h1 style=color:brown>Audit Logs</h1></center>
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div id="auditlogtable" style="display:none;">
+  
+      <table id="auditdata">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Action Type</th>
+            <th>Actor</th>
+            <th>IP Address</th>
+            <th>Resource Type</th>
+            <th>Timestamp</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="pagination" id="auditpagination"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- The Audit log overlay End -->
+
+
+<!-- The Ticket Data overlay Starts-->
+
+<div id="myTicketNav" class="overlay">
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeTicketNav()">&times;</a>
+  <center><h1 style=color:brown>Ticket Lists</h1></center>
+  <label style="position:sticky" class="success" id ="ticket_list_info"></label>
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div id="tickettable" style="display:none;">
+  
+      
+
+      <table id="ticketdata">
+        <thead>
+          <tr>
+            <th>Display ID</th>
+            <th>Subject</th>
+            <th>Contact Name</th>
+            <th>Contact Email</th>
+            <th>Status</th>
+            <th>Prority</th>
+            <th>Category</th>
+            <th>Created At</th>
+            
+    
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="pagination" id="ticketpagination"></div>
+      <div id="searchContainer">
+        <input type="text" id="ticketsearchinput" placeholder="Search...">
+        <button type="button" class=button3 id="searchtickets" onClick="javascript:searchicket();">Search Ticket </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sent Email Log Rendering -->
+
+<div id="myPendingTasksNav" class="overlay">
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closePendingTasksLog()">&times;</a>
+  <center><h1 style=color:brown>Pending Tasks</h1></center>
+  
+    <div class="table-container">
+      <span id="table-container-right">
+        One Click Executor:
+        <button class="table-button-small" id="execute_contact_task" onclick="executePendingTasks('contact','')"><i class="fa fa-address-book" aria-hidden="true"></i> Contact Activities</button>
+        <button class="table-button-small" id="execute_contact_task" onclick="executePendingTasks('audit-login','')"><i class="fa fa-sign-in" aria-hidden="true"></i> Audit Login Logs</button>
+        <button class="table-button-small" id="execute_contact_task" onclick="executePendingTasks('audit-regular','')"><i class="fa fa-refresh" aria-hidden="true"></i> Audit Regular Logs</button>
+        <button class="table-button-small" id="execute_contact_task" onclick="executePendingTasks('audit-client','')"><i class="fa fa-address-card-o" aria-hidden="true"></i> Audit Client Logs</button>
+      </span>
+    <h1 class="table-header">Execute Pending Tasks</h1>
+    
+    <label for="pending_task_id" class="table-label">Task ID:</label>
+    <input type="text" id="pending_task_id" class="table-input">
+    <button class="table-button" id="execute_task" onclick="executePendingTasks('regular',document.getElementById('pending_task_id').value)">Execute</button>
+  </div>
+  
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div id="pendingtaskstable" style="display:none;">
+      <table id="pendingTasksData">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ETA</th>
+            <th>POST PATH</th>
+            <th>POST BODY</th>
+            <th>Failure Count</th>
+            <th>TASK ID</th>
+            <th>STATUS</th>
+            <th>EXECUTE IMMEDIATE</th>
+            <th>ERROR INFO</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!--sent email log end-->
+
+<!-- Sent Email Log Rendering -->
+
+<div id="mySentEmailNav" class="overlay">
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeSentEmailLog()">&times;</a>
+  <center><h1 style=color:brown>Email Logs</h1></center>
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div id="sentEmailLogTable" style="display:none;">
+  
+      
+
+      <table id="emaillogdata">
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Recipients</th>
+            <th>Cc</th>
+            <th>Bcc</th>
+            <th>EmailType</th>
+            <th>Subject</th>
+            <th>Ticket ID</th>
+            <th>Update ID</th>
+            <th>Delivery Status</th>
+            <th>Delivery Message</th>
+            <th>Updated At</th>
+            
+    
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="pagination" id="emaillogpagination"></div>
+    </div>
+  </div>
+
+</div>
+
+<!--sent email log end-->
+
+<!-- The Ticket List log overlay End -->
+  
+ <!--Ticket Details-->
+ 
+ <div id="myTicketDetailsNav" class="overlay">
+    <!-- Button to close the overlay navigation -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeTicketDetailsNav()">&times;</a>
+    <center><h1 style=color:brown>Ticket Details</h1></center>
+    <label style="position:sticky" class="success" id ="ticket_details_info"></label>
+    <!-- Overlay content -->
+    <div class="overlay-content">
+      <div id="ticketdetailstable" style="display:none;">
+        <div id='ticketactions'></div>
+        <table id="ticketdetailsdata" style="width: 100%; border-collapse: collapse; border-spacing: 0; background-color: #fff; box-shadow: 0 0 20px rgba(0,0,0,.05);">
+
+            <thead>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Ticket ID</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Subject</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Contact Name</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Contact Email</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Status</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Priority</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Category</th>
+                  <th style="padding: 20px; font-size: 18px; font-weight: 600; text-align: left;">Created At</th>
+                </tr>
+              </thead>
+            <tbody></tbody>
+            </table>
+            <div id=last_contact_message></div>
+      </div>
+    </div>
+  
+  </div>
+
+        </div>
+
+    
+
+    <div class="footer">
+          <div style="font-family: FontAwesome; float:right;" class="success" id ="ticketinfo"> 
+            Please login to continue...
+            </div>
+            <span style="bottom:10px; right: 700px; display: none; position:inherit;" id="loader" class="loader"></span>
+        <p style="float:left; font-family:Comic Sans MS;">Powered by HF QA Team 2023&nbsp;&nbsp;&nbsp;<label id="fe"></label><label id="be"></label>
+</p>
+</div>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Data from DB</title>
+</head>
+<h1>Bike Details</h1>
+<body>
+<table>
+    <thead>
+    <th>Bike Name</th>
+    <th>Bike Number</th>
+    <th>Bike Model</th>
+    <th>Bike Last Service</th>
+    </thead>
+    {{stu}}
+    <tr>
+        <td>{{st.BikeName}}</td>
+        <td>{{st.BikeNumber}}</td>
+        <td>{{st.BikeModel}}</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data base checking</title>
+</head>
+<body>
+<table>
+    {% if data_list %}
+    <tr>
+        {% for empData in data_list %}
+        <td>empData.EmpName</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        {% endfor %}
+    </tr>
+    {% endif %}
+</table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" >
+    {% csrf_token %}
+    {{correctionForm.as_p}}
+    <!-- Add any form fields or content you need here -->
+    <button type="submit">Name Correction</button>
+</form>
+</body>
+</html>
